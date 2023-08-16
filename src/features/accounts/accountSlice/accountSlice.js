@@ -12,7 +12,7 @@ const accountSlice = createSlice({
   initialState: initialStateAccount,
   reducers: {
     deposit(state, action) {
-      state.balance = state.balance + action.payload;
+      state.balance = state.balance + action.payload.amount;
     },
     withdraw(state, action) {
       state.balance = state.balance - action.payload;
@@ -26,13 +26,20 @@ const accountSlice = createSlice({
       state.balance += action.payload.amount;
     },
     payLoan(state, action) {
+      state.balance -= state.loan;
       state.loan = 0;
       state.loanPurpose = "";
-      state.balance -= state.loan;
     },
   },
 });
 
 export const { deposit, withdraw, requestLoan, payLoan } = accountSlice.actions;
+
+console.log(
+  requestLoan({
+    amount: 20,
+    name: "Krutagna",
+  }),
+);
 
 export default accountSlice.reducer;

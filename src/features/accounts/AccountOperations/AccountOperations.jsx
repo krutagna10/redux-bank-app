@@ -26,22 +26,28 @@ function AccountOperations() {
 
   function handleDeposit() {
     if (depositAmount > 0) {
-      dispatch(deposit(Number(depositAmount), currency));
-      setDepositAmount("");
+      const obj = {
+        amount: Number(depositAmount),
+        currency: currency,
+      };
+      dispatch(deposit(obj));
+      // setDepositAmount("");
     }
   }
 
   function handleWithdrawal() {
     if (currentBalance - withdrawalAmount >= 0) {
       dispatch(withdraw(Number(withdrawalAmount)));
-      setWithdrawalAmount("");
+      // setWithdrawalAmount("");
     }
   }
 
   function handleRequestLoan() {
-    dispatch(requestLoan(Number(loanAmount), loanPurpose));
-    setLoanAmount("");
-    setLoanPurpose("");
+    const obj = {
+      amount: Number(loanAmount),
+      purpose: loanPurpose,
+    };
+    dispatch(requestLoan(obj));
   }
 
   function handlePayLoan() {
