@@ -1,0 +1,74 @@
+@tailwind components;
+@tailwind utilities;
+
+*,
+::after,
+::before {
+  box-sizing: border-box;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+h1,
+h2 {
+  text-align: center;
+}
+
+button {
+  cursor: pointer;
+  white-space: nowrap;
+  padding: 0.25rem 1.5rem;
+}
+
+body {
+  font-family: "Barlow Condensed", sans-serif;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
+.flow > * + * {
+  margin-top: 1.25rem;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  text-align: center;
+  margin-top: 1.25rem;
+}
+
+table input {
+  max-width: 7.25rem;
+}
+
+th,
+td {
+  padding: 1rem;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+/* Form utility */
+.form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.form > input {
+  width: 100%;
+}
