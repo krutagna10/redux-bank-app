@@ -20,34 +20,32 @@ function AccountOperations() {
   const {
     balance: currentBalance,
     loan: currentLoan,
-    loanPurpose: currentLoanPurpose,
     isLoading,
   } = useSelector((state) => state.account);
 
   function handleDeposit() {
     if (depositAmount > 0) {
-      const obj = {
-        amount: Number(depositAmount),
-        currency: currency,
-      };
-      dispatch(deposit(obj));
-      // setDepositAmount("");
+      dispatch(deposit(Number(depositAmount), currency));
+      setDepositAmount("");
+      setCurrency("USD");
     }
   }
 
   function handleWithdrawal() {
     if (currentBalance - withdrawalAmount >= 0) {
       dispatch(withdraw(Number(withdrawalAmount)));
-      // setWithdrawalAmount("");
+      setWithdrawalAmount("");
     }
   }
 
   function handleRequestLoan() {
     const obj = {
       amount: Number(loanAmount),
-      purpose: loanPurpose,
+      loanPurpose: loanPurpose,
     };
     dispatch(requestLoan(obj));
+    setLoanAmount("");
+    setLoanPurpose("");
   }
 
   function handlePayLoan() {
@@ -60,22 +58,21 @@ function AccountOperations() {
       <table>
         <thead>
           <tr>
-            <th>Balance</th>
             <th>Deposit</th>
             <th>Withdraw</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <BalanceDisplay />
             <td>
-              <div className="flex">
+              <div className="flex gap-1">
                 <input
                   type="number"
-                  value={depositAmount}
                   onChange={(event) => {
                     setDepositAmount(event.target.value);
                   }}
+                  placeholder="Deposit Amount"
+                  value={depositAmount}
                 />
                 <select
                   value={currency}
@@ -88,21 +85,28 @@ function AccountOperations() {
                   <option value="GBP">British Pound</option>
                 </select>
 
-                <button disabled={isLoading} onClick={handleDeposit}>
+                <button
+                  className="btn btn--green"
+                  disabled={isLoading}
+                  onClick={handleDeposit}
+                >
                   Deposit
                 </button>
               </div>
             </td>
             <td>
-              <div className="flex">
+              <div className="flex gap-1">
                 <input
                   type="number"
                   value={withdrawalAmount}
                   onChange={(event) => {
                     setWithdrawalAmount(event.target.value);
                   }}
+                  placeholder="Withdrawal amount"
                 />
-                <button onClick={handleWithdrawal}>Withdraw</button>
+                <button className="btn btn--red" onClick={handleWithdrawal}>
+                  Withdraw
+                </button>
               </div>
             </td>
           </tr>
@@ -119,27 +123,37 @@ function AccountOperations() {
         <tbody>
           <tr>
             <td>
-              <div className="flex justify-center">
+              <div className="flex gap-2">
                 <input
                   type="number"
                   value={loanAmount}
                   onChange={(event) => {
                     setLoanAmount(event.target.value);
                   }}
-                  placeholder="Loan amount"
+                  placeholder="Enter Loan amount"
                 />
                 <input
+                  type="text"
                   value={loanPurpose}
                   onChange={(event) => {
                     setLoanPurpose(event.target.value);
                   }}
-                  placeholder="Loan purpose"
+                  placeholder="Enter loan purpose"
                 />
-                <button onClick={handleRequestLoan}>Request loan</button>
+                <button
+                  className="btn btn--green w-full"
+                  onClick={handleRequestLoan}
+                >
+                  Request loan
+                </button>
               </div>
             </td>
             <td>
-              <button onClick={handlePayLoan}>Pay loan (${currentLoan})</button>
+              <div className="grid items-center">
+                <button className="btn btn--red" onClick={handlePayLoan}>
+                  Pay loan (${currentLoan})
+                </button>
+              </div>
             </td>
           </tr>
         </tbody>

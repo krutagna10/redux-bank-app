@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import { createCustomer } from "../customerSlice/customerSlice.js";
 
 function Customer() {
-  const [fullName, setFullName] = useState("");
+  const [name, setName] = useState("");
   const [nationalId, setNationalId] = useState("");
 
   const dispatch = useDispatch();
 
-  function handleFullNameChange(event) {
-    setFullName(event.target.value);
+  function handleNameChange(event) {
+    setName(event.target.value);
   }
 
   function handleNationalIdChange(event) {
@@ -18,11 +18,15 @@ function Customer() {
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (fullName.trim().length === 0) {
+    if (name.trim().length === 0) {
       return;
     }
 
-    dispatch(createCustomer(fullName, nationalId));
+    const obj = {
+      name: name,
+      nationalId: nationalId,
+    };
+    dispatch(createCustomer(obj));
   }
 
   return (
@@ -30,16 +34,16 @@ function Customer() {
       <h2>Create new customer</h2>
       <form className="form" onSubmit={handleSubmit}>
         <input
-          value={fullName}
-          onChange={handleFullNameChange}
-          placeholder="Enter your Full Name"
+          value={name}
+          onChange={handleNameChange}
+          placeholder="Enter Your Name"
         />
         <input
           value={nationalId}
           onChange={handleNationalIdChange}
           placeholder="Enter your national ID"
         />
-        <button>Create new customer</button>
+        <button className="btn btn--green">Create new customer</button>
       </form>
     </div>
   );
