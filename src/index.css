@@ -7,8 +7,6 @@
   --dark-green: rgb(9, 206, 61);
   --red: rgb(255, 131, 131);
   --dark-red: rgb(255, 87, 87);
-  --yellow: rgb(255, 212, 59);
-  --dark-yellow: rgb(217, 171, 12);
 }
 
 *,
@@ -132,15 +130,4 @@ input[type="number"] {
 .btn--red:hover {
   color: var(--dark-red);
   border: 2px solid var(--dark-red);
-}
-
-.btn--yellow {
-  color: var(--yellow);
-  border: 2px solid var(--yellow);
-  background-color: rgba(255, 212, 59, 0.15);
-}
-
-.btn--yellow:hover {
-  color: var(--dark-yellow);
-  border: 2px solid var(--dark-yellow);
 }
